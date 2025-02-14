@@ -9,14 +9,15 @@ import zipfile
 import datetime
 from typing import List
 from dotenv import load_dotenv
-from transformation import transform_row, transform_dataframe  # Import transformation functions
+from transformations import transform_row, transform_dataframe  # Import transformation functions
+from constants import(
+    TOPIC,
+    BOOTSTRAP_SERVERS
+)    
 
 # Load environment variables
 load_dotenv()
 
-# Kafka configuration from .env
-BOOTSTRAP_SERVERS = os.getenv("KAFKA_BROKER", "localhost:9092")
-TOPIC = os.getenv("KAFKA_TOPIC", "sales_data")
 
 def get_data(dataset_url):
     """

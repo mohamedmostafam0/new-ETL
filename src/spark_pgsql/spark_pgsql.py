@@ -1,45 +1,45 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import from_json, col
 from pyspark.sql.types import StructType, StringType, IntegerType, FloatType
+from constants import (
+    KAFKA_BROKER, TOPIC, POSTGRES_URL, POSTGRES_USER, POSTGRES_PASSWORD
+)
 
-KAFKA_BROKER = "localhost:9094"
-TOPIC = "sales_data"
-POSTGRES_URL = "jdbc:postgresql://localhost:5432/${POSTGRES_DB}"
-POSTGRES_USER = ${POSTGRES_USER}
-POSTGRES_PASSWORD =${POSTGRES_PASSWORD}
+def define_schema():
+    """Define schema for incoming Kafka JSON data."""
+    return StructType() \
+        .add("InvoiceNo", StringType()) \
+        .add("StockCode", StringType()) \
+        .add("Description", StringType()) \
+        .add("Quantity", IntegerType()) \
+        .add("InvoiceDate", StringType()) \
+        .add("UnitPrice", FloatType()) \
+        .add("CustomerID", StringType()) \
+        .add("Country", StringType())
 
+def initialize_spark():
+    """Initialize and return a Spark session."""
+    return SparkSession.builder \
+        .appName("SalesDataPipeline") \
+        .config("spark.jars.packages", "org.postgresql:postgresql:42.5.1") \
+        .getOrCreate()
 
-# Define schema for incoming data
-schema = StructType() \
-    .add("InvoiceNo", StringType()) \
-    .add("StockCode", StringType()) \
-    .add("Description", StringType()) \
-    .add("Quantity", IntegerType()) \
-    .add("InvoiceDate", StringType()) \
-    .add("UnitPrice", FloatType()) \
-    .add("CustomerID", StringType()) \
-    .add("Country", StringType())
+def read_from_kafka(spark):
+    """Read streaming data from Kafka topic."""
+    return spark.readStream \
+        .format("kafka") \
+        .option("kafka.bootstrap.servers", KAFKA_BROKER) \
+        .option("subscribe", TOPIC) \
+        .load()
 
-# Initialize Spark session
-spark = SparkSession.builder \
-    .appName("SalesDataPipeline") \
-    .config("spark.jars.packages", "org.postgresql:postgresql:42.5.1") \
-    .getOrCreate()
+def parse_kafka_data(df, schema):
+    """Parse Kafka JSON messages into structured DataFrame."""
+    return df.selectExpr("CAST(value AS STRING)") \
+        .select(from_json(col("value"), schema).alias("data")) \
+        .select("data.*")
 
-# Read data from Kafka
-df = spark.readStream \
-    .format("kafka") \
-    .option("kafka.bootstrap.servers", KAFKA_BROKER) \
-    .option("subscribe", TOPIC) \
-    .load()
-
-# Convert Kafka JSON data to structured format
-df = df.selectExpr("CAST(value AS STRING)") \
-    .select(from_json(col("value"), schema).alias("data")) \
-    .select("data.*")
-
-# Write stream to PostgreSQL
 def write_to_postgres(df, epoch_id):
+    """Write batch data to PostgreSQL."""
     df.write \
         .format("jdbc") \
         .option("url", POSTGRES_URL) \
@@ -50,8 +50,19 @@ def write_to_postgres(df, epoch_id):
         .mode("append") \
         .save()
 
-df.writeStream \
-    .foreachBatch(write_to_postgres) \
-    .outputMode("append") \
-    .start() \
-    .awaitTermination()
+def main():
+    """Main function to execute the streaming pipeline."""
+    schema = define_schema()
+    spark = initialize_spark()
+    kafka_df = read_from_kafka(spark)
+    parsed_df = parse_kafka_data(kafka_df, schema)
+    
+    query = parsed_df.writeStream \
+        .foreachBatch(write_to_postgres) \
+        .outputMode("append") \
+        .start()
+    
+    query.awaitTermination()
+
+if __name__ == "__main__":
+    main()
