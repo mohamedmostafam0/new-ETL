@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 
 # API params
 PATH_LAST_PROCESSED = "./data/last_processed.json"
@@ -13,7 +14,7 @@ URL_API = "https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/rappe
 URL_API = URL_API.format(MAX_LIMIT, "{}", "{}")
 
 #KAFKA PARAMS
-TOPIC = os.genenv('KAFKA_TOPIC')
+TOPIC = os.getenv('KAFKA_TOPIC')
 BOOTSTRAP_SERVERS = os.getenv('KAFKA_BROKER')
 
 # POSTGRES PARAMS
@@ -21,6 +22,6 @@ POSTGRES_DB = os.getenv("POSTGRES_DB")
 POSTGRES_USER = os.getenv("POSTGRES_USER")
 POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")  
 POSTGRES_HOST = os.getenv("POSTGRES_HOST")
-POSTGRES_URL = f"jdbc:postgresql://{POSTGRES_USER}:5432/postgres"
+POSTGRES_URL = f"jdbc:postgresql://{POSTGRES_HOST}:5432/{POSTGRES_DB}"
 
 

@@ -56,6 +56,20 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  db-init:
+    build:
+      context: . # Build from the current directory
+      dockerfile: db-init/dockerfile
+    image: db-init-image # Custom image name
+    volumes:
+      - .:/app # Mount the project directory
+    working_dir: /app
+    command: ["python3", "Scripts/create_table.py"] # Run the script
+    depends_on:
+      - postgres
+    networks:
+      - airflow-kafka
+
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin

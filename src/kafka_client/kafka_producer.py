@@ -9,7 +9,7 @@ import zipfile
 import datetime
 from typing import List
 from dotenv import load_dotenv
-from transformations import transform_row, transform_dataframe  # Import transformation functions
+from src.kafka_client.transformations import transform_row, transform_dataframe  # Import transformation functions
 from constants import(
     TOPIC,
     BOOTSTRAP_SERVERS
