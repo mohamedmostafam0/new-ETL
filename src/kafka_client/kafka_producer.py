@@ -92,15 +92,18 @@ def publish_to_kafka(csv_file_path):
         producer.flush()
         producer.close()
 
+def stream():
+    """ Function to be called by Airflow DAG to start Kafka producer """
+    dataset_url = "https://archive.ics.uci.edu/static/public/352/online+retail.zip"
+    csv_file_path = get_data(dataset_url)  # ✅ Get the CSV file
+    if csv_file_path:
+        publish_to_kafka(csv_file_path)  # ✅ Start publishing messages to Kafka
+    else:
+        print("Dataset preparation failed.")
+
 if __name__ == "__main__":
     try:
-        dataset_url = "https://archive.ics.uci.edu/static/public/352/online+retail.zip"
-        csv_file_path = get_data(dataset_url)
-        if csv_file_path:
-            print(f"Dataset ready at: {csv_file_path}")
-            publish_to_kafka(csv_file_path)  # Pass the correct CSV file path
-        else:
-            print("Dataset preparation failed.")
+        stream()  # ✅ Run the streaming process when executed directly
     except KeyboardInterrupt:
         print("Producer stopped.")
     except Exception as e:

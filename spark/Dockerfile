@@ -5,8 +5,8 @@ WORKDIR /opt/bitnami/spark
 
 RUN pip install py4j
 
-COPY ./src/spark_pgsql/spark_streaming.py ./spark_streaming.py
-COPY ./src/constants.py ./src/constants.py
+COPY ./src/spark_pgsql/spark_pgsql.py /opt/bitnami/spark/scripts/spark_pgsql.py
+COPY ./src/constants.py /opt/bitnami/spark/scripts/constants.py
 
 ENV POSTGRES_DOCKER_USER=host.docker.internal
 ARG POSTGRES_PASSWORD

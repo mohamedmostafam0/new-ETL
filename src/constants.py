@@ -2,7 +2,8 @@ import os
 from dotenv import load_dotenv
 
 
-load_dotenv()
+load_dotenv(dotenv_path="/opt/airflow/.env")  # Explicit path to ensure loading
+
 # API params
 PATH_LAST_PROCESSED = "./data/last_processed.json"
 MAX_LIMIT = 100

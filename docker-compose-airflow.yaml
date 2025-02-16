@@ -2,7 +2,7 @@ version: "3.8"
 x-airflow-common: &airflow-common
   build:
     context: .
-    dockerfile: ./airflow_resources/Dockerfile
+    dockerfile: ./airflow/Dockerfile
   image: de-project/airflow:latest
   environment: &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
@@ -16,7 +16,7 @@ x-airflow-common: &airflow-common
     AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: "true"
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
     AIRFLOW_UID: ${AIRFLOW_UID}
-    PYTHONPATH: /opt/airflow/src
+    PYTHONPATH: /opt/airflow/dags/src
   volumes:
     - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
