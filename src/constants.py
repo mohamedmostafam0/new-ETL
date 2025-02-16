@@ -1,6 +1,8 @@
 import os
 from dotenv import load_dotenv
 
+
+load_dotenv()
 # API params
 PATH_LAST_PROCESSED = "./data/last_processed.json"
 MAX_LIMIT = 100
@@ -23,5 +25,10 @@ POSTGRES_USER = os.getenv("POSTGRES_USER")
 POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")  
 POSTGRES_HOST = os.getenv("POSTGRES_HOST")
 POSTGRES_URL = f"jdbc:postgresql://{POSTGRES_HOST}:5432/{POSTGRES_DB}"
+
+
+
+print(f"Loaded Kafka Config - BOOTSTRAP_SERVERS: {BOOTSTRAP_SERVERS}, TOPIC: {TOPIC}")
+print(f"Loaded PostgreSQL Config - POSTGRES_USER: {POSTGRES_USER}, POSTGRES_HOST: {POSTGRES_HOST}")
 
 

@@ -9,13 +9,13 @@ import zipfile
 import datetime
 from typing import List
 from dotenv import load_dotenv
-from src.kafka_client.transformations import transform_row, transform_dataframe  # Import transformation functions
-from constants import(
+from kafka_client.transformations import transform_row, transform_dataframe  # Import transformation functions
+from constants import (
     TOPIC,
-    BOOTSTRAP_SERVERS
-)    
+    BOOTSTRAP_SERVERS  
+)
 
-# Load environment variables
+print("your bootstrap server is " + BOOTSTRAP_SERVERS + " and your topic is " + TOPIC) 
 load_dotenv()
 
 

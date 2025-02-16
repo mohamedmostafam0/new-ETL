@@ -41,9 +41,9 @@ def try_execute_sql(conn, sql: str):
         conn.rollback()
 
 def create_table():
-    """Creates the rappel_conso_table if it doesn't exist."""
+    """Creates the retail_table if it doesn't exist."""
     create_table_sql = """
-    CREATE TABLE IF NOT EXISTS rappel_conso_table (
+    CREATE TABLE IF NOT EXISTS retail_table (
         id SERIAL PRIMARY KEY,
         invoice_no TEXT,
         stock_code TEXT,
