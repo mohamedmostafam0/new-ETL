@@ -1,7 +1,8 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import from_json, col
 from pyspark.sql.types import StructType, StringType, IntegerType, FloatType
-sys.path.insert(0, '/opt/bitnami/spark/scripts')  # Ensure Spark finds constants.py
+import sys
+sys.path.insert(0, '/opt/bitnami/spark')  # Ensure Spark finds constants.py
 from constants import (
     KAFKA_BROKER, TOPIC, POSTGRES_URL, POSTGRES_USER, POSTGRES_PASSWORD
 )

@@ -4,8 +4,11 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.providers.docker.operators.docker import DockerOperator
 from datetime import datetime
-
-sys.path.insert(0, '/opt/airflow/dags/src')
+import os
+from constants import (
+    KAFKA_BROKER, TOPIC, POSTGRES_URL, POSTGRES_USER, POSTGRES_PASSWORD
+)
+sys.path.insert(0, os.path.abspath("/opt/airflow/dags/src"))
 
 from kafka_client.kafka_producer import stream
 
@@ -22,7 +25,7 @@ default_args = {
 
 
 with DAG(
-    dag_id="kafka_spark_dag",
+    dag_id="kafka_spark_dag",       
     default_args=default_args,
     schedule_interval=timedelta(days=1),
     catchup=False,
@@ -36,15 +39,24 @@ with DAG(
 
     spark_stream_task = DockerOperator(
         task_id="pyspark_consumer",
-        image="rappel-conso/spark:latest",
+        image="Mohamed/spark:latest",
         api_version="auto",
         auto_remove=True,
-        command="./bin/spark-submit --master local[*] --packages org.postgresql:postgresql:42.5.4,org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0 /opt/bitnami/spark/scripts/spark_pgsql.py",
+        command="./bin/spark-submit --master local[*] --packages org.postgresql:postgresql:42.5.4,org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0 /opt/bitnami/spark/spark_pgsql.py",
         docker_url='tcp://docker-proxy:2375',
-        environment={'SPARK_LOCAL_HOSTNAME': 'localhost'},
+        environment={
+            'SPARK_LOCAL_HOSTNAME': 'localhost',
+            'KAFKA_BROKER': KAFKA_BROKER,  # ✅ Using variable from constants.py
+            'KAFKA_TOPIC': TOPIC,
+            'POSTGRES_URL': POSTGRES_URL,
+            'POSTGRES_USER': POSTGRES_USER,
+            'POSTGRES_PASSWORD': POSTGRES_PASSWORD,
+        },
         network_mode="airflow-kafka",
+        mount_tmp_dir=False,  # ✅ Disable tmp directory mounting
         dag=dag,
     )
+
 
 
     kafka_stream_task >> spark_stream_task

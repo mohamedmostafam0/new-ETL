@@ -1,0 +1,17 @@
+[2025-02-21T14:35:50.484+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: kafka_spark_dag.kafka_data_stream manual__2025-02-21T14:35:46.099655+00:00 [queued]>
+[2025-02-21T14:35:50.520+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: kafka_spark_dag.kafka_data_stream manual__2025-02-21T14:35:46.099655+00:00 [queued]>
+[2025-02-21T14:35:50.521+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-21T14:35:50.550+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): kafka_data_stream> on 2025-02-21 14:35:46.099655+00:00
+[2025-02-21T14:35:50.574+0000] {standard_task_runner.py:57} INFO - Started process 5171 to run task
+[2025-02-21T14:35:50.585+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'kafka_spark_dag', 'kafka_data_stream', 'manual__2025-02-21T14:35:46.099655+00:00', '--job-id', '43', '--raw', '--subdir', 'DAGS_FOLDER/dag_kafka_spark.py', '--cfg-path', '/tmp/tmp8dkszrxm']
+[2025-02-21T14:35:50.586+0000] {standard_task_runner.py:85} INFO - Job 43: Subtask kafka_data_stream
+[2025-02-21T14:35:50.699+0000] {task_command.py:416} INFO - Running <TaskInstance: kafka_spark_dag.kafka_data_stream manual__2025-02-21T14:35:46.099655+00:00 [running]> on host 9240cfed0829
+[2025-02-21T14:35:50.824+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='kafka_spark_dag' AIRFLOW_CTX_TASK_ID='kafka_data_stream' AIRFLOW_CTX_EXECUTION_DATE='2025-02-21T14:35:46.099655+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-21T14:35:46.099655+00:00'
+[2025-02-21T14:36:15.440+0000] {logging_mixin.py:154} INFO - Dataset downloaded successfully.
+[2025-02-21T14:36:15.737+0000] {logging_mixin.py:154} INFO - Dataset extracted successfully.
+[2025-02-21T14:36:15.737+0000] {logging_mixin.py:154} INFO - No CSV file found in extracted data.
+[2025-02-21T14:36:15.741+0000] {logging_mixin.py:154} INFO - Dataset preparation failed.
+[2025-02-21T14:36:15.742+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-02-21T14:36:15.771+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=kafka_spark_dag, task_id=kafka_data_stream, execution_date=20250221T143546, start_date=20250221T143550, end_date=20250221T143615
+[2025-02-21T14:36:15.853+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-21T14:36:15.953+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check

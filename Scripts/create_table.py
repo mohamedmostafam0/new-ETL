@@ -4,15 +4,14 @@ import psycopg2
 from dotenv import load_dotenv  # Import dotenv
 
 # Load environment variables from .env
-load_dotenv()
+load_dotenv(dotenv_path="/opt/airflow/.env")
 
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+# ✅ Debug: Print database credentials
+print(f"Connecting to PostgreSQL at {os.getenv('POSTGRES_HOST')} with user {os.getenv('POSTGRES_USER')}")
 
 from src.constants import (
     POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST
 )
-print(f"Connecting to PostgreSQL at {POSTGRES_HOST} with user {POSTGRES_USER}")
 
 def get_db_connection():
     """Establish a database connection and return the connection object."""
