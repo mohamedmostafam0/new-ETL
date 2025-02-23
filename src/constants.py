@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 
 
-load_dotenv(dotenv_path="/opt/airflow/.env")  # Explicit path to ensure loading
+load_dotenv()  # Explicit path to ensure loading
 
 # API params
 PATH_LAST_PROCESSED = "./data/last_processed.json"
@@ -31,5 +31,5 @@ POSTGRES_URL = f"jdbc:postgresql://{POSTGRES_HOST}:5432/{POSTGRES_DB}"
 
 print(f"Loaded Kafka Config - BOOTSTRAP_SERVERS: {BOOTSTRAP_SERVERS}, TOPIC: {TOPIC}")
 print(f"Loaded PostgreSQL Config - POSTGRES_USER: {POSTGRES_USER}, POSTGRES_HOST: {POSTGRES_HOST}")
-
+print(f"postgress url: {POSTGRES_URL}, postgres database: {POSTGRES_DB}")
 

@@ -1,0 +1,108 @@
+[2025-02-21T14:37:45.395+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: kafka_spark_dag.pyspark_consumer manual__2025-02-21T14:35:46.099655+00:00 [queued]>
+[2025-02-21T14:37:45.481+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: kafka_spark_dag.pyspark_consumer manual__2025-02-21T14:35:46.099655+00:00 [queued]>
+[2025-02-21T14:37:45.486+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 2
+[2025-02-21T14:37:45.545+0000] {taskinstance.py:1382} INFO - Executing <Task(DockerOperator): pyspark_consumer> on 2025-02-21 14:35:46.099655+00:00
+[2025-02-21T14:37:45.578+0000] {standard_task_runner.py:57} INFO - Started process 6077 to run task
+[2025-02-21T14:37:45.611+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'kafka_spark_dag', 'pyspark_consumer', 'manual__2025-02-21T14:35:46.099655+00:00', '--job-id', '45', '--raw', '--subdir', 'DAGS_FOLDER/dag_kafka_spark.py', '--cfg-path', '/tmp/tmpeiu3nkzd']
+[2025-02-21T14:37:45.620+0000] {standard_task_runner.py:85} INFO - Job 45: Subtask pyspark_consumer
+[2025-02-21T14:37:45.859+0000] {task_command.py:416} INFO - Running <TaskInstance: kafka_spark_dag.pyspark_consumer manual__2025-02-21T14:35:46.099655+00:00 [running]> on host 9240cfed0829
+[2025-02-21T14:37:46.301+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='kafka_spark_dag' AIRFLOW_CTX_TASK_ID='pyspark_consumer' AIRFLOW_CTX_EXECUTION_DATE='2025-02-21T14:35:46.099655+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-21T14:35:46.099655+00:00'
+[2025-02-21T14:37:46.592+0000] {docker.py:343} INFO - Starting docker container from image Mohamed/spark:latest
+[2025-02-21T14:37:48.389+0000] {docker.py:413} INFO - [38;5;6mspark [38;5;5m14:37:48.38 [0m[38;5;2mINFO [0m ==>
+[2025-02-21T14:37:48.413+0000] {docker.py:413} INFO - [38;5;6mspark [38;5;5m14:37:48.40 [0m[38;5;2mINFO [0m ==> [1mWelcome to the Bitnami spark container[0m
+[2025-02-21T14:37:48.431+0000] {docker.py:413} INFO - [38;5;6mspark [38;5;5m14:37:48.42 [0m[38;5;2mINFO [0m ==> Subscribe to project updates by watching [1mhttps://github.com/bitnami/containers[0m
+[2025-02-21T14:37:48.443+0000] {docker.py:413} INFO - [38;5;6mspark [38;5;5m14:37:48.43 [0m[38;5;2mINFO [0m ==> Submit issues and feature requests at [1mhttps://github.com/bitnami/containers/issues[0m
+[2025-02-21T14:37:48.454+0000] {docker.py:413} INFO - [38;5;6mspark [38;5;5m14:37:48.45 [0m[38;5;2mINFO [0m ==>
+[2025-02-21T14:37:48.578+0000] {docker.py:413} INFO - 
+[2025-02-21T14:38:07.806+0000] {docker.py:413} INFO - :: loading settings :: url = jar:file:/opt/bitnami/spark/jars/ivy-2.5.1.jar!/org/apache/ivy/core/settings/ivysettings.xml
+[2025-02-21T14:38:08.327+0000] {docker.py:413} INFO - Ivy Default Cache set to: /opt/bitnami/spark/.ivy2/cache
+The jars for the packages stored in: /opt/bitnami/spark/.ivy2/jars
+[2025-02-21T14:38:08.338+0000] {docker.py:413} INFO - org.postgresql#postgresql added as a dependency
+org.apache.spark#spark-sql-kafka-0-10_2.12 added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-1df69c03-3223-40fc-9bac-4734d568bf08;1.0
+	confs: [default]
+[2025-02-21T14:38:11.712+0000] {docker.py:413} INFO - found org.postgresql#postgresql;42.5.4 in central
+[2025-02-21T14:38:12.120+0000] {docker.py:413} INFO - found org.checkerframework#checker-qual;3.5.0 in central
+[2025-02-21T14:38:16.506+0000] {docker.py:413} INFO - found org.apache.spark#spark-sql-kafka-0-10_2.12;3.5.0 in central
+[2025-02-21T14:38:19.113+0000] {docker.py:413} INFO - found org.apache.spark#spark-token-provider-kafka-0-10_2.12;3.5.0 in central
+[2025-02-21T14:38:19.385+0000] {docker.py:413} INFO - found org.apache.kafka#kafka-clients;3.4.1 in central
+[2025-02-21T14:38:19.557+0000] {docker.py:413} INFO - found org.lz4#lz4-java;1.8.0 in central
+[2025-02-21T14:38:19.729+0000] {docker.py:413} INFO - found org.xerial.snappy#snappy-java;1.1.10.3 in central
+[2025-02-21T14:38:21.052+0000] {docker.py:413} INFO - found org.slf4j#slf4j-api;2.0.7 in central
+[2025-02-21T14:38:23.647+0000] {docker.py:413} INFO - found org.apache.hadoop#hadoop-client-runtime;3.3.4 in central
+[2025-02-21T14:38:24.637+0000] {docker.py:413} INFO - found org.apache.hadoop#hadoop-client-api;3.3.4 in central
+[2025-02-21T14:38:26.800+0000] {docker.py:413} INFO - found commons-logging#commons-logging;1.1.3 in central
+[2025-02-21T14:38:27.019+0000] {docker.py:413} INFO - found com.google.code.findbugs#jsr305;3.0.0 in central
+[2025-02-21T14:38:29.863+0000] {docker.py:413} INFO - found org.apache.commons#commons-pool2;2.11.1 in central
+[2025-02-21T14:38:29.982+0000] {docker.py:413} INFO - downloading https://repo1.maven.org/maven2/org/postgresql/postgresql/42.5.4/postgresql-42.5.4.jar ...
+[2025-02-21T14:38:30.353+0000] {docker.py:413} INFO - [SUCCESSFUL ] org.postgresql#postgresql;42.5.4!postgresql.jar (423ms)
+[2025-02-21T14:38:30.405+0000] {docker.py:413} INFO - downloading https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.5.0/spark-sql-kafka-0-10_2.12-3.5.0.jar ...
+[2025-02-21T14:38:30.588+0000] {docker.py:413} INFO - [SUCCESSFUL ] org.apache.spark#spark-sql-kafka-0-10_2.12;3.5.0!spark-sql-kafka-0-10_2.12.jar (228ms)
+[2025-02-21T14:38:30.664+0000] {docker.py:413} INFO - downloading https://repo1.maven.org/maven2/org/checkerframework/checker-qual/3.5.0/checker-qual-3.5.0.jar ...
+[2025-02-21T14:38:30.836+0000] {docker.py:413} INFO - [SUCCESSFUL ] org.checkerframework#checker-qual;3.5.0!checker-qual.jar (243ms)
+[2025-02-21T14:38:30.934+0000] {docker.py:413} INFO - downloading https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.5.0/spark-token-provider-kafka-0-10_2.12-3.5.0.jar ...
+[2025-02-21T14:38:31.076+0000] {docker.py:413} INFO - [SUCCESSFUL ] org.apache.spark#spark-token-provider-kafka-0-10_2.12;3.5.0!spark-token-provider-kafka-0-10_2.12.jar (212ms)
+[2025-02-21T14:38:31.165+0000] {docker.py:413} INFO - downloading https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.4.1/kafka-clients-3.4.1.jar ...
+[2025-02-21T14:38:32.578+0000] {docker.py:413} INFO - [SUCCESSFUL ] org.apache.kafka#kafka-clients;3.4.1!kafka-clients.jar (1476ms)
+[2025-02-21T14:38:32.637+0000] {docker.py:413} INFO - downloading https://repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.0/jsr305-3.0.0.jar ...
+[2025-02-21T14:38:32.708+0000] {docker.py:413} INFO - [SUCCESSFUL ] com.google.code.findbugs#jsr305;3.0.0!jsr305.jar (125ms)
+[2025-02-21T14:38:32.758+0000] {docker.py:413} INFO - downloading https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/commons-pool2-2.11.1.jar ...
+[2025-02-21T14:38:32.852+0000] {docker.py:413} INFO - [SUCCESSFUL ] org.apache.commons#commons-pool2;2.11.1!commons-pool2.jar (139ms)
+[2025-02-21T14:38:32.905+0000] {docker.py:413} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client-runtime/3.3.4/hadoop-client-runtime-3.3.4.jar ...
+[2025-02-21T14:38:46.114+0000] {docker.py:413} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-client-runtime;3.3.4!hadoop-client-runtime.jar (13242ms)
+[2025-02-21T14:38:46.237+0000] {docker.py:413} INFO - downloading https://repo1.maven.org/maven2/org/lz4/lz4-java/1.8.0/lz4-java-1.8.0.jar ...
+[2025-02-21T14:38:46.580+0000] {docker.py:413} INFO - [SUCCESSFUL ] org.lz4#lz4-java;1.8.0!lz4-java.jar (429ms)
+[2025-02-21T14:38:46.710+0000] {docker.py:413} INFO - downloading https://repo1.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.10.3/snappy-java-1.1.10.3.jar ...
+[2025-02-21T14:38:47.357+0000] {docker.py:413} INFO - [SUCCESSFUL ] org.xerial.snappy#snappy-java;1.1.10.3!snappy-java.jar(bundle) (751ms)
+[2025-02-21T14:38:47.417+0000] {docker.py:413} INFO - downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-api/2.0.7/slf4j-api-2.0.7.jar ...
+[2025-02-21T14:38:47.491+0000] {docker.py:413} INFO - [SUCCESSFUL ] org.slf4j#slf4j-api;2.0.7!slf4j-api.jar (117ms)
+[2025-02-21T14:38:47.560+0000] {docker.py:413} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client-api/3.3.4/hadoop-client-api-3.3.4.jar ...
+[2025-02-21T14:38:53.001+0000] {docker.py:413} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-client-api;3.3.4!hadoop-client-api.jar (5488ms)
+[2025-02-21T14:38:53.095+0000] {docker.py:413} INFO - downloading https://repo1.maven.org/maven2/commons-logging/commons-logging/1.1.3/commons-logging-1.1.3.jar ...
+[2025-02-21T14:38:53.169+0000] {docker.py:413} INFO - [SUCCESSFUL ] commons-logging#commons-logging;1.1.3!commons-logging.jar (149ms)
+[2025-02-21T14:38:53.178+0000] {docker.py:413} INFO - :: resolution report :: resolve 21584ms :: artifacts dl 23257ms
+	:: modules in use:
+[2025-02-21T14:38:53.196+0000] {docker.py:413} INFO - com.google.code.findbugs#jsr305;3.0.0 from central in [default]
+[2025-02-21T14:38:53.204+0000] {docker.py:413} INFO - commons-logging#commons-logging;1.1.3 from central in [default]
+[2025-02-21T14:38:53.208+0000] {docker.py:413} INFO - org.apache.commons#commons-pool2;2.11.1 from central in [default]
+	org.apache.hadoop#hadoop-client-api;3.3.4 from central in [default]
+[2025-02-21T14:38:53.210+0000] {docker.py:413} INFO - org.apache.hadoop#hadoop-client-runtime;3.3.4 from central in [default]
+[2025-02-21T14:38:53.220+0000] {docker.py:413} INFO - org.apache.kafka#kafka-clients;3.4.1 from central in [default]
+	org.apache.spark#spark-sql-kafka-0-10_2.12;3.5.0 from central in [default]
+	org.apache.spark#spark-token-provider-kafka-0-10_2.12;3.5.0 from central in [default]
+	org.checkerframework#checker-qual;3.5.0 from central in [default]
+	org.lz4#lz4-java;1.8.0 from central in [default]
+	org.postgresql#postgresql;42.5.4 from central in [default]
+	org.slf4j#slf4j-api;2.0.7 from central in [default]
+	org.xerial.snappy#snappy-java;1.1.10.3 from central in [default]
+[2025-02-21T14:38:53.221+0000] {docker.py:413} INFO - ---------------------------------------------------------------------
+	|                  |            modules            ||   artifacts   |
+	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+	---------------------------------------------------------------------
+[2025-02-21T14:38:53.230+0000] {docker.py:413} INFO - |      default     |   13  |   13  |   13  |   0   ||   13  |   13  |
+[2025-02-21T14:38:53.236+0000] {docker.py:413} INFO - ---------------------------------------------------------------------
+[2025-02-21T14:38:53.509+0000] {docker.py:413} INFO - :: retrieving :: org.apache.spark#spark-submit-parent-1df69c03-3223-40fc-9bac-4734d568bf08
+[2025-02-21T14:38:53.512+0000] {docker.py:413} INFO - confs: [default]
+[2025-02-21T14:38:54.264+0000] {docker.py:413} INFO - 13 artifacts copied, 0 already retrieved (58001kB/762ms)
+[2025-02-21T14:38:55.501+0000] {docker.py:413} INFO - 25/02/21 14:38:55 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2025-02-21T14:38:59.939+0000] {docker.py:413} INFO - Traceback (most recent call last):
+  File "/opt/bitnami/spark/spark_pgsql.py", line 4, in <module>
+[2025-02-21T14:38:59.940+0000] {docker.py:413} INFO - sys.path.insert(0, '/opt/bitnami/spark/scripts')  # Ensure Spark finds constants.py
+    ^^^
+[2025-02-21T14:38:59.942+0000] {docker.py:413} INFO - NameError
+[2025-02-21T14:38:59.943+0000] {docker.py:413} INFO - : name 'sys' is not defined
+[2025-02-21T14:39:00.065+0000] {docker.py:413} INFO - 25/02/21 14:39:00 INFO ShutdownHookManager: Shutdown hook called
+[2025-02-21T14:39:00.077+0000] {docker.py:413} INFO - 25/02/21 14:39:00 INFO ShutdownHookManager: Deleting directory /tmp/spark-c3958b3f-7aa4-4603-933f-6e6a27534598
+[2025-02-21T14:39:01.033+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/docker/operators/docker.py", line 486, in execute
+    return self._run_image()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/docker/operators/docker.py", line 360, in _run_image
+    return self._run_image_with_mounts(self.mounts, add_tmp_variable=False)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/docker/operators/docker.py", line 421, in _run_image_with_mounts
+    raise DockerContainerFailedException(f"Docker container failed: {result!r}", logs=log_lines)
+airflow.providers.docker.exceptions.DockerContainerFailedException: Docker container failed: {'StatusCode': 1}
+[2025-02-21T14:39:01.053+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=kafka_spark_dag, task_id=pyspark_consumer, execution_date=20250221T143546, start_date=20250221T143745, end_date=20250221T143901
+[2025-02-21T14:39:01.132+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 45 for task pyspark_consumer (Docker container failed: {'StatusCode': 1}; 6077)
+[2025-02-21T14:39:01.191+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-21T14:39:01.263+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

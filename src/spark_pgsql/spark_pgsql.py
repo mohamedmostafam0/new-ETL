@@ -4,8 +4,9 @@ from pyspark.sql.types import StructType, StringType, IntegerType, FloatType
 import sys
 sys.path.insert(0, '/opt/bitnami/spark')  # Ensure Spark finds constants.py
 from constants import (
-    KAFKA_BROKER, TOPIC, POSTGRES_URL, POSTGRES_USER, POSTGRES_PASSWORD
+    BOOTSTRAP_SERVERS, TOPIC, POSTGRES_URL, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB
 )
+
 
 def define_schema():
     """Define schema for incoming Kafka JSON data."""
@@ -30,7 +31,7 @@ def read_from_kafka(spark):
     """Read streaming data from Kafka topic."""
     return spark.readStream \
         .format("kafka") \
-        .option("kafka.bootstrap.servers", KAFKA_BROKER) \
+        .option("kafka.bootstrap.servers", BOOTSTRAP_SERVERS) \
         .option("subscribe", TOPIC) \
         .load()
 
@@ -45,7 +46,7 @@ def write_to_postgres(df, epoch_id):
     df.write \
         .format("jdbc") \
         .option("url", POSTGRES_URL) \
-        .option("dbtable", "sales") \
+        .option("dbtable", POSTGRES_DB) \
         .option("user", POSTGRES_USER) \
         .option("password", POSTGRES_PASSWORD) \
         .option("driver", "org.postgresql.Driver") \

@@ -6,9 +6,10 @@ from airflow.providers.docker.operators.docker import DockerOperator
 from datetime import datetime
 import os
 from constants import (
-    KAFKA_BROKER, TOPIC, POSTGRES_URL, POSTGRES_USER, POSTGRES_PASSWORD
+    BOOTSTRAP_SERVERS, TOPIC, POSTGRES_URL, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_DB
 )
-sys.path.insert(0, os.path.abspath("/opt/airflow/dags/src"))
+sys.path.insert(0, '/opt/airflow/dags/src')
+
 
 from kafka_client.kafka_producer import stream
 
@@ -46,11 +47,13 @@ with DAG(
         docker_url='tcp://docker-proxy:2375',
         environment={
             'SPARK_LOCAL_HOSTNAME': 'localhost',
-            'KAFKA_BROKER': KAFKA_BROKER,  # ✅ Using variable from constants.py
+            'KAFKA_BROKER': BOOTSTRAP_SERVERS, 
             'KAFKA_TOPIC': TOPIC,
             'POSTGRES_URL': POSTGRES_URL,
             'POSTGRES_USER': POSTGRES_USER,
             'POSTGRES_PASSWORD': POSTGRES_PASSWORD,
+            'POSTGRES_HOST': POSTGRES_HOST,
+            "POSTGRES_DB": POSTGRES_DB
         },
         network_mode="airflow-kafka",
         mount_tmp_dir=False,  # ✅ Disable tmp directory mounting

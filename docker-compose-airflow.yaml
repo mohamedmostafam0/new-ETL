@@ -37,6 +37,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST: ${POSTGRES_HOST}
     volumes:
       - postgres-db-volume:/var/lib/postgresql/data
     healthcheck:
@@ -72,6 +73,8 @@ services:
     command: scheduler
     env_file:
       - .env # ✅ Ensures environment variables are loaded from .env
+    # environment:
+    #   _PIP_ADDITIONAL_REQUIREMENTS: "flask-session"
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8974/health"]
       interval: 30s
